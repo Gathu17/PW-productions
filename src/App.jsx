@@ -9,32 +9,32 @@ function App() {
         {
             title: "Rob Duran Podcast",
             client: "Client Name",
-            imageURL: "/src/assets/files/rdp.png",
+            imageURL: "/static/files/rdp.png",
         },
         {
             title: "Maverick Etching",
             client: "Client Name",
-            imageURL: "/src/assets/files/Maverick.png",
+            imageURL: "/static/files/Maverick.png",
         },
         {
             title: "The FireConversation Podcast",
             client: "Client Name",
-            imageURL: "/src/assets/files/talkin.png",
+            imageURL: "/static/files/talkin.png",
         },
         {
             title: "Limitless Inspiration",
             client: "Client Name",
-            imageURL: "/src/assets/files/Inspiration.png",
+            imageURL: "/static/files/Inspiration.png",
         },
         {
             title: "Sophisticated Savages Podcast",
             client: "Client Name",
-            imageURL: "/src/assets/files/portfolio5.jpg",
+            imageURL: "/static/files/portfolio5.jpg",
         },
         {
             title: "Eden Cosmetics",
             client: "Client Name",
-            imageURL: "/src/assets/files/portfolio6.jpg",
+            imageURL: "/static/files/portfolio6.jpg",
         },
     ];
 
@@ -44,25 +44,25 @@ function App() {
             title: "Premium Video Editing",
             description:
                 "Seamlessly blending timeline layouts, color grading, sound mixing, and motion graphics to create polished, refined video content.",
-            imageURL: "/src/assets/files/service1.jpg", // replace with your image
+            imageURL: "/static/files/service1.jpg", // replace with your image
         },
         {
             title: "Cinematic Storytelling",
             description:
                 "Collaborating with ad agencies, businesses, and especially with content creators to produce content for social media, broadcast, web and print campaigns.",
-            imageURL: "/src/assets/files/service2.jpg", // replace with your image
+            imageURL: "/static/files/service2.jpg", // replace with your image
         },
         {
             title: "Monetize Your Brand Like Never Before!",
             description:
                 "We transform your brand into a revenue-generating powerhouse through multiple platforms—custom apparel, accessories, exclusive artwork, and more.",
-            imageURL: "/src/assets/files/service3.jpg", // replace with your image
+            imageURL: "/static/files/service3.jpg", // replace with your image
         },
         {
             title: "Real Estate Videography & Photography",
             description:
                 "Showcasing properties with high-quality visuals that engage and inspire, tailored for commercial, corporate, and advertising needs.",
-            imageURL: "/src/assets/files/service4.jpg", // replace with your image
+            imageURL: "/static/files/service4.jpg", // replace with your image
         },
     ];
     const [currentService, setCurrentService] = useState(0);
@@ -103,7 +103,7 @@ function App() {
                     loop
                     className="absolute inset-0 w-full h-full object-cover"
                 >
-                    <source src="/src/assets/files/hero.mp4" type="video/mp4" />
+                    <source src="/static/files/hero.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
                 <div className="absolute inset-0 bg-black-900/50"></div>
@@ -204,7 +204,7 @@ function App() {
                 <div
                     className="relative bg-black py-0"
                     style={{
-                        backgroundImage: "url('/src/assets/files/wall.jpg')",
+                        backgroundImage: "url('/static/files/wall.jpg')",
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat",
@@ -342,7 +342,7 @@ function App() {
                 <div
                     className="relative"
                     style={{
-                        backgroundImage: "url('/src/assets/files/wall.jpg')",
+                        backgroundImage: "url('/static/files/wall.jpg')",
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat",
