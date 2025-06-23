@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3001;
 
 // Enable CORS for your frontend
 app.use(cors({
-  origin: 'http://localhost:5173' // Your Vite dev server
+  origin: ['http://localhost:5173', 'https://pw-productions.vercel.app']
 }));
 
 app.use(express.json());
@@ -101,3 +101,4 @@ app.get('/api/printful/catalog/:id', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Proxy server running on port ${PORT}`);
 });
+
