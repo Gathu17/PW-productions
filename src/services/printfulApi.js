@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3001/api/printful';
+const API_URL = 'https://pw-productions.onrender.com/';
 
 class PrintfulApi {
   constructor(accessToken) {
