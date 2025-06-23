@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./assets/main.css";
+import Store from './components/Store';
 
 function App() {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -29,13 +30,9 @@ function App() {
         {
             title: "Sophisticated Savages Podcast",
             client: "Client Name",
-            imageURL: "/files/portfolio5.jpg",
+            imageURL: "/files/savages.png",
         },
-        {
-            title: "Eden Cosmetics",
-            client: "Client Name",
-            imageURL: "/files/portfolio6.jpg",
-        },
+       
     ];
 
     // Carousel services array
@@ -337,6 +334,9 @@ function App() {
                 </div>
             </section>
 
+            {/* Store Section */}
+            <Store />
+
             {/* Contact Section */}
             <section id="contact" className="bg-black-800">
                 <div
@@ -439,7 +439,7 @@ function App() {
             </section>
 
             {/* Footer */}
-            <footer className="py-8 bg-green-900 border-t border-gray-800">
+            <footer className="py-8  border-t border-gray-800">
                 <div className="container mx-auto px-6">
                     <div className="flex flex-col md:flex-row justify-between items-center">
                         <div className="text-xl font-bold text-white mb-4 md:mb-0">
@@ -507,3 +507,4 @@ function App() {
 }
 
 export default App;
+
