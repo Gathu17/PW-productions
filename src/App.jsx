@@ -377,7 +377,7 @@ function App() {
                                             </svg>
                                         </div>
                                         <span className="text-gray-300">
-                                            contact@pwproductions.net
+                                            PoiisonWaterProductions@gmail.com
                                         </span>
                                     </div>
                                     <div className="flex items-center">
@@ -398,7 +398,7 @@ function App() {
                                             </svg>
                                         </div>
                                         <span className="text-gray-300">
-                                            (555) 123-4567
+                                            +1 (646) 509-5984
                                         </span>
                                     </div>
                                 </div>
