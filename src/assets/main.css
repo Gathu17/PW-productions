@@ -1,0 +1,23 @@
+/* Button Styles */
+.btn-primary {
+  @apply bg-pw-green-500 hover:bg-pw-green-600 text-white font-bold py-2 px-4 rounded transition-all duration-300;
+}
+
+.btn-secondary {
+  @apply border border-pw-green-500 text-pw-green-500 hover:bg-pw-green-500/10 font-bold py-2 px-4 rounded transition-all duration-300;
+}
+
+/* Animation Classes */
+.animate-pulse-slow {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

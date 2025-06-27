@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import PrintfulApi from "../services/printfulApi";
+import { useCart } from "../context/CartContext";
 
 function PrintfulProducts() {
   const [products, setProducts] = useState([]);
@@ -33,6 +34,44 @@ function PrintfulProducts() {
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState(""); // 'success' or 'error'
   const [modalMessage, setModalMessage] = useState("");
+
+  const { addToCart, setOnContinueShopping } = useCart();
+
+  // Set up the continue shopping callback
+  useEffect(() => {
+    setOnContinueShopping(() => () => {
+      // Close any open modals without triggering order success logic
+      setShowModal(false);
+      setModalType("");
+      setModalMessage("");
+
+      // Reset product selection state
+      setSelectedProduct(null);
+      setSelectedVariant(null);
+      setQuantity(1);
+      setShowOrderForm(false);
+
+      // Reset order form
+      setOrderForm({
+        recipient: {
+          name: "",
+          company: "",
+          address1: "",
+          address2: "",
+          city: "",
+          state_code: "",
+          state_name: "",
+          country_code: "US",
+          country_name: "United States",
+          zip: "",
+          phone: "",
+          email: "",
+          tax_number: "",
+        },
+        shipping: "STANDARD",
+      });
+    });
+  }, [setOnContinueShopping]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -235,7 +274,7 @@ function PrintfulProducts() {
       console.error("Error placing order:", err);
 
       // Show error modal with the detailed error message from API
-      alert(err)
+      alert(err);
       setModalType("error");
       setModalMessage(err.message || "Failed to place order");
       setShowModal(true);
@@ -245,12 +284,16 @@ function PrintfulProducts() {
   };
 
   const handleCloseModal = () => {
+    const wasOrderSuccess =
+      modalType === "success" &&
+      modalMessage.includes("Order placed successfully");
+
     setShowModal(false);
     setModalType("");
     setModalMessage("");
 
-    // If it was a successful order, reset everything
-    if (modalType === "success") {
+    // Only reset everything if it was a successful order (not add to cart or continue shopping)
+    if (wasOrderSuccess) {
       setSelectedProduct(null);
       setSelectedVariant(null);
       setQuantity(1);
@@ -272,6 +315,26 @@ function PrintfulProducts() {
         },
         shipping: "STANDARD",
       });
+    }
+    // For add to cart success or other modals, just close the modal but keep the product details open
+  };
+
+  const handleAddToCart = () => {
+    if (selectedProduct && selectedVariant) {
+      addToCart(selectedProduct, quantity, selectedVariant);
+
+      // Show success message
+      setModalType("success");
+      setModalMessage(`Added ${quantity} ${selectedVariant.name} to cart!`);
+      setShowModal(true);
+    } else if (selectedProduct && selectedProduct.variants?.length === 0) {
+      // Product has no variants
+      addToCart(selectedProduct, quantity);
+
+      // Show success message
+      setModalType("success");
+      setModalMessage(`Added ${quantity} ${selectedProduct.title} to cart!`);
+      setShowModal(true);
     }
   };
 
@@ -524,18 +587,30 @@ function PrintfulProducts() {
               </div>
             )}
 
-            <div className="mt-6">
+            <div className="mt-6 space-y-3">
               {!showOrderForm ? (
-                <button
-                  onClick={handleShowOrderForm}
-                  className="btn-primary w-full"
-                  disabled={
-                    !selectedProduct ||
-                    (selectedProduct.variants?.length > 0 && !selectedVariant)
-                  }
-                >
-                  Place Order
-                </button>
+                <>
+                  <button
+                    onClick={handleAddToCart}
+                    className="border border-pw-green-500 text-pw-green-500 hover:bg-pw-green-500/10 font-bold py-2 px-4 rounded transition-all duration-300 w-full disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={
+                      !selectedProduct ||
+                      (selectedProduct.variants?.length > 0 && !selectedVariant)
+                    }
+                  >
+                    Add to Cart
+                  </button>
+                  <button
+                    onClick={handleShowOrderForm}
+                    className="bg-pw-green-500 hover:bg-pw-green-600 text-white font-bold py-2 px-4 rounded transition-all duration-300 w-full disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={
+                      !selectedProduct ||
+                      (selectedProduct.variants?.length > 0 && !selectedVariant)
+                    }
+                  >
+                    Place Order
+                  </button>
+                </>
               ) : (
                 <div className="space-y-4">
                   <h3 className="text-white font-medium">
@@ -779,7 +854,7 @@ function PrintfulProducts() {
               key={product.id}
               className="bg-pw-black-800 rounded-lg overflow-hidden shadow-lg hover:shadow-pw-green-500/20 transition-all duration-300"
             >
-              <div className="relative h-140">
+              <div className="relative h-140 ">
                 {product.thumbnail_url ? (
                   <img
                     src={product.thumbnail_url}

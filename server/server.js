@@ -29,12 +29,7 @@ app.get("/api/printful/products", async (req, res) => {
       }
     );
 
-    // Limit to only 5 products
-    const limitedData = {
-      ...response.data,
-      result: response.data.result.slice(0, 5),
-    };
-    res.json(limitedData);
+    res.json(response.data);
   } catch (error) {
     console.error("Error proxying to Printful:", error.message);
     res.status(error.response?.status || 500).json({
