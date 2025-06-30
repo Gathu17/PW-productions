@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3001;
 // Enable CORS for your frontend
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://pw-productions.vercel.app"],
+    origin: ["http://localhost:5173", "https://pw-productions.vercel.app", "https://khaki-porcupine-818847.hostingersite.com", "pwproductions.live"],
   })
 );
 
