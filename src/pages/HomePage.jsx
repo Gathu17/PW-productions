@@ -47,13 +47,19 @@ function HomePage() {
       title: "Limitless Inspiration",
       client: "Client Name",
       imageURL: "/files/Inspiration.png",
-      link: "https://www.instagram.com/xo_edencosmetics?igsh=dmo2MndlcWJkOHUx",
+      link: "https://www.instagram.com/limitless.motivation.24?igsh=MWx2azRvMHR1dHZwbA==",
     },
     {
       title: "Sophisticated Savages Podcast",
       client: "Client Name",
       imageURL: "/files/savages.png",
       link: "https://youtube.com/@sophisticatedsavagespodcast?si=vxkIG-DSvfyFepL5",
+    },
+    {
+      title: "XO Eden Cosmetics",
+      client: "Client Name",
+      imageURL: "/files/XOEden.png",
+      link: "https://www.instagram.com/xo_edencosmetics?igsh=dmo2MndlcWJkOHUx",
     },
   ];
 
@@ -504,7 +510,7 @@ function HomePage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
                     <div className="absolute bottom-0 left-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-20">
                       <h3 className="text-white font-bold">{project.title}</h3>
-                      <p className="text-green-500">{project.client}</p>
+                      {/* <p className="text-green-500">{project.client}</p> */}
                       {project.link && (
                         <div className="flex items-center mt-2 text-green-400 text-sm">
                           <svg
