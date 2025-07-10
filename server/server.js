@@ -15,6 +15,7 @@ app.use(
       "https://khaki-porcupine-818847.hostingersite.com",
       "https://pwproductions.live",
       "https://www.pwproductions.net",
+      "https://pwproductions.net",
     ],
   })
 );
