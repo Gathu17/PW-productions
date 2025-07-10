@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import PrintfulApi from "../services/printfulApi";
 import { useCart } from "../context/CartContext";
+import ClientStoreSelector from "./ClientStoreSelector";
 
-function PrintfulProducts() {
+function PrintfulProducts({ initialClient = "fire-conversation" }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,6 +14,8 @@ function PrintfulProducts() {
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [showOrderForm, setShowOrderForm] = useState(false);
+  const [selectedClient, setSelectedClient] = useState(initialClient);
+  const [currentStore, setCurrentStore] = useState(null);
   const [orderForm, setOrderForm] = useState({
     recipient: {
       name: "",
@@ -76,19 +79,33 @@ function PrintfulProducts() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        setLoading(true);
         const printfulApi = new PrintfulApi();
-        const productsData = await printfulApi.getProducts();
-        console.log(productsData);
-        setProducts(productsData);
+        const productsData = await printfulApi.getProducts(selectedClient);
+        console.log("Products data:", productsData);
+
+        // Extract products and store info from response
+        if (productsData.result) {
+          setProducts(productsData.result);
+        } else {
+          setProducts([]);
+        }
+
+        // Set current store info
+        if (productsData.client) {
+          setCurrentStore(productsData.client);
+        }
+
         setLoading(false);
       } catch (err) {
+        console.error("Error fetching products:", err);
         setError("Failed to load products. Please try again later.");
         setLoading(false);
       }
     };
 
     fetchProducts();
-  }, []);
+  }, [selectedClient]);
 
   const handleViewDetails = async (product) => {
     try {
@@ -99,7 +116,8 @@ function PrintfulProducts() {
       // Fetch detailed product information
       const printfulApi = new PrintfulApi();
       const detailedProductData = await printfulApi.getProductDetails(
-        product.id
+        product.id,
+        selectedClient
       );
 
       // Transform the API response to match the expected structure
@@ -262,7 +280,11 @@ function PrintfulProducts() {
       };
 
       // Create and confirm the order
-      const order = await printfulApi.createOrder(orderData, true);
+      const order = await printfulApi.createOrder(
+        orderData,
+        true,
+        selectedClient
+      );
 
       // Show success modal
       alert(`Order placed successfully! Order ID: ${order.id}`);
@@ -822,6 +844,22 @@ function PrintfulProducts() {
   // Otherwise, show the product grid with toggle option
   return (
     <div>
+      {/* Client Store Selector */}
+      {/* <ClientStoreSelector
+        selectedClient={selectedClient}
+        onClientChange={setSelectedClient}
+      /> */}
+
+      {/* Current Store Info */}
+      {currentStore && (
+        <div className="mb-6 p-4 bg-pw-green-500/10 border border-pw-green-500/20 rounded-lg">
+          <h2 className="text-xl font-bold text-white mb-2">
+            {currentStore.name}
+          </h2>
+          <p className="text-gray-300 text-sm">{currentStore.description}</p>
+        </div>
+      )}
+
       {/* <div className="flex justify-between items-center mb-6">
         <h3 className="text-xl font-bold text-white">
           {viewMode === 'catalog' ? 'Printful Catalog' : 'My Store Products'}

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Store from "../components/Store";
 import CartButton from "../components/CartButton";
 import Cart from "../components/Cart";
@@ -23,6 +24,8 @@ const scrollToSectionMobile = (sectionId, setIsMobileMenuOpen) => {
 function StorePage() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [searchParams] = useSearchParams();
+  const clientParam = searchParams.get("client") || "fire-conversation";
 
   useEffect(() => {
     setIsLoaded(true);
@@ -54,7 +57,7 @@ function StorePage() {
               <span className="text-green-500">PW</span>Productions
             </a>
           </div>
-          
+
           <nav className="hidden md:flex space-x-8">
             <a
               href="/"
@@ -159,8 +162,8 @@ function StorePage() {
       </header>
 
       {/* Store Section */}
-      <Store />
-      
+      <Store initialClient={clientParam} />
+
       {/* Cart Component */}
       <Cart />
     </div>

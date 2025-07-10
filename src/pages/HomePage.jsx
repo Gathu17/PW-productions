@@ -19,6 +19,16 @@ const scrollToSectionMobile = (sectionId, setIsMobileMenuOpen) => {
   setIsMobileMenuOpen(false); // Close mobile menu after navigation
 };
 
+// Available client stores - manually maintained
+const availableStores = [
+  {
+    key: "fire-conversation",
+    name: "The Fire Conversation Podcast",
+    description: "Official merchandise for The Fire Conversation Podcast",
+  },
+  
+];
+
 function HomePage() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -543,26 +553,63 @@ function HomePage() {
           <div className="mt-16 bg-gradient-to-r from-pw-green-500/10 to-pw-green-600/10 rounded-2xl p-8 border border-pw-green-500/20">
             <div className="text-center">
               <h3 className="text-3xl font-bold text-white mb-4">
-                Ready to Rock Your Brand?
+                Explore Our Client Collections
               </h3>
               <p className="text-gray-300 text-lg mb-6 max-w-2xl mx-auto">
-                Transform your vision into reality with our exclusive
-                merchandise collection. From custom apparel to branded
-                accessories - we've got everything you need to make your mark!
+                Browse exclusive merchandise collections for our featured
+                clients. Each store offers unique branded apparel and
+                accessories designed specifically for their community.
               </p>
+              {/* Available Stores */}
+              {availableStores.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                  {availableStores.map((store) => (
+                    <a
+                      key={store.key}
+                      href={`/store?client=${store.key}`}
+                      className="group bg-pw-black-800/50 border border-pw-green-500/20 rounded-lg p-6 hover:border-pw-green-500/40 transition-all duration-300 transform hover:scale-105 no-underline"
+                    >
+                      <div className="flex items-center mb-3">
+                        <div className="w-3 h-3 bg-pw-green-500 rounded-full mr-3 group-hover:animate-pulse"></div>
+                        <h4 className="text-white font-bold text-lg group-hover:text-pw-green-400 transition-colors">
+                          {store.name}
+                        </h4>
+                      </div>
+                      <p className="text-gray-400 text-sm mb-4 group-hover:text-gray-300 transition-colors">
+                        {store.description}
+                      </p>
+                      <div className="flex items-center text-pw-green-500 text-sm font-medium">
+                        <span>Shop Collection</span>
+                        <svg
+                          className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <div className="py-8 text-gray-400">
+                  <p>No client stores available at the moment.</p>
+                </div>
+              )}
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a
-                  href="/store"
-                  className="bg-pw-green-500 hover:bg-pw-green-600 text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-pw-green-500/25 no-underline"
-                >
-                  🛍️ Explore Our Store
-                </a>
-                {/* <button
+                <button
                   onClick={() => scrollToSection("contact")}
                   className="border border-pw-green-500 text-pw-green-500 hover:bg-pw-green-500/10 font-bold py-3 px-8 rounded-lg transition-all duration-300"
                 >
                   Get Custom Quote
-                </button> */}
+                </button>
               </div>
               <div className="mt-4 flex justify-center items-center space-x-6 text-sm text-gray-400">
                 <div className="flex items-center">
