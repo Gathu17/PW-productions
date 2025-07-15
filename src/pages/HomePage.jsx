@@ -22,9 +22,27 @@ const scrollToSectionMobile = (sectionId, setIsMobileMenuOpen) => {
 // Available client stores - manually maintained
 const availableStores = [
   {
+    key: "pw-productions",
+    name: "PW Productions",
+    description: "Official merchandise for PW Productions",
+  },
+  {
+    key: "rdp",
+    name: "The Rob Duran Podcast",
+    description: "Official merchandise for The Rob Duran Podcast",
+    url: "https://rdpmerch.printful.me/",
+  },
+  {
+    key: "heart-flower",
+    name: "HeartFlower Merch",
+    description: "Official merchandise for Heart-Flower",
+    url: "https://theheartflower.printful.me/",
+  },
+  {
     key: "fire-conversation",
     name: "The Fire Conversation Podcast",
     description: "Official merchandise for The Fire Conversation Podcast",
+    url: "https://pwproductions.printful.me/"
   },
   
 ];
@@ -272,7 +290,7 @@ function HomePage() {
           ></div>
           <div className="relative animate-fade-in delay-300">
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
-              Bringing <span className="text-green-500">Stories</span> to Life
+              Let's create something <span className="text-green-500">remarkable</span> together
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl">
               Professional video editing and production services that transform
@@ -553,7 +571,7 @@ function HomePage() {
           <div className="mt-16 bg-gradient-to-r from-pw-green-500/10 to-pw-green-600/10 rounded-2xl p-8 border border-pw-green-500/20">
             <div className="text-center">
               <h3 className="text-3xl font-bold text-white mb-4">
-                Explore Our Client Collections
+                Explore Our Collections
               </h3>
               <p className="text-gray-300 text-lg mb-6 max-w-2xl mx-auto">
                 Browse exclusive merchandise collections for our featured
@@ -566,18 +584,19 @@ function HomePage() {
                   {availableStores.map((store) => (
                     <a
                       key={store.key}
-                      href={`/store?client=${store.key}`}
+                      href={store.key == 'pw-productions' ? '/store' : store.url}
                       className="group bg-pw-black-800/50 border border-pw-green-500/20 rounded-lg p-6 hover:border-pw-green-500/40 transition-all duration-300 transform hover:scale-105 no-underline"
                     >
-                      <div className="flex items-center mb-3">
+                      <div className="flex flex-col items-center mb-3">
                         <div className="w-3 h-3 bg-pw-green-500 rounded-full mr-3 group-hover:animate-pulse"></div>
                         <h4 className="text-white font-bold text-lg group-hover:text-pw-green-400 transition-colors">
                           {store.name}
                         </h4>
-                      </div>
-                      <p className="text-gray-400 text-sm mb-4 group-hover:text-gray-300 transition-colors">
+                        <p className="text-gray-400 text-sm mb-4 group-hover:text-gray-300 transition-colors">
                         {store.description}
                       </p>
+                      </div>
+                      
                       <div className="flex items-center text-pw-green-500 text-sm font-medium">
                         <span>Shop Collection</span>
                         <svg

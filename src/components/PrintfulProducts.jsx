@@ -851,14 +851,14 @@ function PrintfulProducts({ initialClient = "fire-conversation" }) {
       /> */}
 
       {/* Current Store Info */}
-      {currentStore && (
+      {/* {currentStore && (
         <div className="mb-6 p-4 bg-pw-green-500/10 border border-pw-green-500/20 rounded-lg">
           <h2 className="text-xl font-bold text-white mb-2">
             {currentStore.name}
           </h2>
           <p className="text-gray-300 text-sm">{currentStore.description}</p>
         </div>
-      )}
+      )} */}
 
       {/* <div className="flex justify-between items-center mb-6">
         <h3 className="text-xl font-bold text-white">

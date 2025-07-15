@@ -40,7 +40,7 @@ const CLIENT_STORES = {
     description: "Official merchandise for Sophisticated Savages Podcast",
   },
   "pw-productions": {
-    id: null, // Add PWProductions store ID when available
+    id: 16236391, // Add PWProductions store ID when available
     name: "PWProductions",
     description: "Official PWProductions merchandise",
   },
@@ -73,7 +73,7 @@ app.get("/api/printful/stores", async (req, res) => {
 app.get("/api/printful/products", async (req, res) => {
   try {
     const { client } = req.query;
-    const clientKey = client || "fire-conversation"; // Default to fire-conversation
+    const clientKey = client || "pw-productions"; // Default to pw-productions
     const clientStore = CLIENT_STORES[clientKey];
 
     if (!clientStore || !clientStore.id) {
